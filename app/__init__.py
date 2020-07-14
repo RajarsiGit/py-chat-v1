@@ -3,8 +3,6 @@ from flask_socketio import SocketIO
 
 socketio = SocketIO()
 
-app = create_app(debug=True)
-
 def create_app(debug=False):
     """Create an application."""
     app = Flask(__name__)
