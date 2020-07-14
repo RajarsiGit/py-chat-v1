@@ -1,1 +1,1 @@
-web: gunicorn chat:app --log-file - --preload
+web: gunicorn wsgi:app --log-file - --preload

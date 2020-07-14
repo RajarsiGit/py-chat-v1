@@ -1,1 +1,4 @@
-web: gunicorn chat:app --log-file - --preload
+from app import socketio
+
+if __name__ == '__main__':
+    socketio.run(app)
