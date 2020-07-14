@@ -5,7 +5,7 @@ socketio = SocketIO()
 
 """Create an application."""
 app = Flask(__name__)
-app.debug = debug
+app.debug = True
 app.config['SECRET_KEY'] = 'gjr39dkjn344_!67#'
 
 from .main import main as main_blueprint
