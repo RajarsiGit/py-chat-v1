@@ -1,1 +1,1 @@
-web: gunicorn wsgi:app --log-file - --preload
+web: gunicorn --worker-class eventlet -w 1 wsgi:socketio
