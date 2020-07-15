@@ -12,5 +12,3 @@ from .main import main as main_blueprint
 app.register_blueprint(main_blueprint)
 
 socketio.init_app(app)
-
-socketio.run(app)
