@@ -14,7 +14,7 @@ h1
 	margin-bottom: 0;
 	margin-top: 0;
 	text-align: center;
-	font-size: 40px;
+	font-size: 30px;
 	padding: 10px;
 }
 h3
@@ -52,10 +52,6 @@ input[type=text], input[type=password] {
 	border: 1px solid #ccc;
 	box-sizing: border-box;
   }
-#container
-{
-	height: 80%;
-}
 #chatbox
 {
 	background-color: #F5FFFA;
@@ -64,7 +60,7 @@ input[type=text], input[type=password] {
 	margin-right: auto;
 	width: 95%;
 	max-width: 600px;
-	height: 500px;
+	height: 480px;
 	overflow-y: auto;
 	margin-top: 25px;
 }
@@ -90,6 +86,9 @@ input[type=text], input[type=password] {
 #textInput {
 	height: 38px;
 	width: 80%;
+	margin: 0px 0px;
+	padding-top: 22px;
+	padding-bottom: 18px;
 	padding-left: 10px;
 	float: left;
 	border: none;
@@ -107,7 +106,7 @@ input[type=text], input[type=password] {
 	margin-bottom: 0;
 	margin-top: 0;
 	text-align: center;
-	font-size: 40px;
+	font-size: 30px;
 	padding: 10px;
 }
 #title{
@@ -120,12 +119,12 @@ input[type=text], input[type=password] {
 }
 #buttonClose {
 	background-color: #EF5350;
-	height: 40px;
-	width: 40px;
+	height: 35px;
+	width: 35px;
 	float: right;
 	padding: 0;
-	margin-top: 7px;
-	margin-right: 5px;
+	margin-top: 0px;
+	margin-right: 0px;
 	font-family: none;
 	font-size: 20px;
 	line-height: 0.5;

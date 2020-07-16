@@ -1,6 +1,9 @@
 <!DOCTYPE html>
     <head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 		<script type="text/javascript">
@@ -18,7 +21,7 @@
         <title>Login Panel</title>
     </head>
     <body>
-		<h1>Flask-SocetIO Chat</h1>
+		<h1>Flask-SocketIO Chat</h1>
 		<form method="POST" accept-charset="utf-8" autocomplete="off">
 			{{ form.hidden_tag() }}
 			{{ form.name.label }} {{ form.name() }} {% for error in form.name.errors %}{{ error }}{% endfor %}<br>

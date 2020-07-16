@@ -2,6 +2,9 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 		<script type="text/javascript">
@@ -15,15 +18,15 @@
 		<script type="text/javascript">
 			var url = "/static/style.css?q=" + createDynamicURL().toString();
 			$("#one").attr("href", url)
-        </script>
+		</script>
         <title>Chat Room</title>
 	</head>
-	<body>
+	<body onload="adjustView()">
 		<div id="head">
-			<h1 id="title">Flask-SocetIO Chat</h1>
+			<h1 id="title">Flask-SocketIO Chat</h1>
 			<button id="buttonClose" onclick="leaveRoom()"><i class="fa fa-close"></i></button>
 		</div>
-		<div id="container">
+		<div>
 			<div id="chatbox">
 			</div>
 			<div id="userInput">
@@ -58,7 +61,8 @@
 				function sendMessage() {
 					var rawText = $("#textInput").val();
 					$("#textInput").val("");
-					socket.emit("message", {msg: rawText})
+					if(rawText != "")
+						socket.emit("message", {msg: rawText})
 				}
 				$("#textInput").keypress(function(e) {
 					if(e.which == 13) {
@@ -74,6 +78,11 @@
                         window.location.href = "{{ url_for('.index') }}";
                     });
                 }
+				function adjustView(){
+					document.getElementById("chatbox").style.height = (window.innerHeight - 200).toString() + "px"
+					$("#chatbox").animate({ scrollTop: $("#chatbox").prop("scrollHeight") }, 0);
+				}
+				window.onresize = adjustView
 			</script>
 		</div>
 	</body>

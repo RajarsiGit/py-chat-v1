@@ -49,8 +49,8 @@ def chat():
     pin = session.get('pin', '')
     if name == '' or room == '' or pin == '':
         return redirect(url_for('.index'))
-    return render_template('chat_https.html', name=name, room=room, pin=pin)
-    #return render_template('chat_http.html', name=name, room=room, pin=pin)
+    #return render_template('chat_https.html', name=name, room=room, pin=pin)
+    return render_template('chat_http.html', name=name, room=room, pin=pin)
 
 @socketio.on('joined', namespace='/chat')
 def joined(message):
@@ -79,4 +79,4 @@ def left(message):
     emit('status', {'msg' : session.get('name') + ' left this room'}, room=room)
     
 if __name__ == "__main__":
-    socketio.run(app)
+    socketio.run(app, host='192.168.2.3')
