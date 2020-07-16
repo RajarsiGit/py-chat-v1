@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+    <head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+		<script type="text/javascript">
+			function createDynamicURL() {
+			    return parseInt(Math.random()*1000000000000);
+			}
+		</script>
+		<link id="one" rel="stylesheet" type="text/css" href="">
+		<link id="two" rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link id="three" rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+		<script type="text/javascript">
+			var url = "/static/style.css?q=" + createDynamicURL().toString();
+			$("#one").attr("href", url)
+		</script>
+        <title>Login Panel</title>
+    </head>
+    <body>
+		<h1>Flask-SocetIO Chat</h1>
+		<form method="POST" accept-charset="utf-8" autocomplete="off">
+			{{ form.hidden_tag() }}
+			{{ form.name.label }} {{ form.name() }} {% for error in form.name.errors %}{{ error }}{% endfor %}<br>
+			{{ form.room.label }} {{ form.room() }} {% for error in form.room.errors %}{{ error }}{% endfor %}<br>
+			{{ form.pin.label }} {{ form.pin() }} {% for error in form.pin.errors %}{{ error }}{% endfor %}<br>
+			{{ form.submit() }}
+		</form>
+		<script type="text/javascript">
+			document.getElementById("name").placeholder="Enter Username"
+			document.getElementById("room").placeholder="Enter Room Name"
+			document.getElementById("pin").placeholder="Enter PIN"
+		</script>
+    </body>
+</html>
