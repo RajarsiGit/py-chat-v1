@@ -82,7 +82,7 @@
 					$("#chatbox").animate({ scrollTop: $("#chatbox").prop("scrollHeight") }, 0);
 				}
 				window.onresize = adjustView
-				//window.onbeforeunload = leaveRoom
+				window.onunload = leaveRoom
 			</script>
 		</div>
 	</body>

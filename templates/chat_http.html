@@ -61,8 +61,7 @@
 				function sendMessage() {
 					var rawText = $("#textInput").val();
 					$("#textInput").val("");
-					if(rawText != "")
-						socket.emit("message", {msg: rawText})
+					socket.emit("message", {msg: rawText})
 				}
 				$("#textInput").keypress(function(e) {
 					if(e.which == 13) {
@@ -83,6 +82,7 @@
 					$("#chatbox").animate({ scrollTop: $("#chatbox").prop("scrollHeight") }, 0);
 				}
 				window.onresize = adjustView
+				window.onunload = leaveRoom
 			</script>
 		</div>
 	</body>
