@@ -14,7 +14,7 @@ app.config['TESTING'] = False
 app.config['DEBUG'] = True
 app.config['FLASK_ENV'] = 'deployment'
 app.config['SECRET_KEY'] = secret_key
-app.config['DEBUG'] = True
+
 app.register_blueprint(main)
 
 socketio = SocketIO(app)
