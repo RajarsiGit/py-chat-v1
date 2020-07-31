@@ -79,4 +79,4 @@ def left(message):
     emit('status', {'msg' : session.get('name') + ' left this room'}, room=room)
     
 if __name__ == "__main__":
-    socketio.run(app, host='192.168.2.3')
+    socketio.run(app)
