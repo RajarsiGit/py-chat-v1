@@ -5,15 +5,15 @@
 		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 		<meta http-equiv="Pragma" content="no-cache" />
 		<meta http-equiv="Expires" content="0" />
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js" integrity="sha512-11t8Q+vY9JlCrr+PveZKTYJq8n7O09Y5X/pk/aMd3vJugSvu4xOunGEUzaADqL3I8cZKE/pBwwCfXzDkRJh2sQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<script type="text/javascript">
 			function createDynamicURL() {
 			    return parseInt(Math.random()*1000000000000);
 			}
 		</script>
 		<link id="one" rel="stylesheet" type="text/css" href="">
-		<link id="two" rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link id="two" rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 		<link id="three" rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 		<script type="text/javascript">
 			var url = "/static/style.css?q=" + createDynamicURL().toString();
@@ -34,33 +34,35 @@
 				<button id="buttonInput" type="submit"><i class="fa fa-send"></i></button>
 			</div>
 			<script>
-				socket = io.connect('https://' + document.domain + ':' + location.port + '/chat');
-                socket.on('connect', function() {
+				var socket = io('/chat');
+
+				function appendMessage(className, text) {
+					var $p = $('<p>').addClass(className);
+					var $span = $('<span>').text(text);
+					$p.append($span);
+					$("#chatbox").append($p);
+					$("#chatbox").animate({ scrollTop: $("#chatbox").prop("scrollHeight") }, 700);
+				}
+
+				socket.on('connect', function() {
                     socket.emit('joined', {});
                 });
                 socket.on("status", function(data) {
-                    var serverHtml = '<p class="botText"><span>' + data.msg + '</span></p>';
-                    $("#chatbox").append(serverHtml);
-					$("#chatbox").animate({ scrollTop: $("#chatbox").prop("scrollHeight") }, 700);
+                    appendMessage("botText", data.msg);
                 });
 				socket.on("self_status", function(data) {
-                    var serverHtml = '<p class="userText"><span>' + data.msg + '</span></p>';
-                    $("#chatbox").append(serverHtml);
-					$("#chatbox").animate({ scrollTop: $("#chatbox").prop("scrollHeight") }, 700);
+                    appendMessage("userText", data.msg);
                 });
                 socket.on("message", (data)=>{
-                    var serverHtml = '<p class="botText"><span>' + data.msg + '</span></p>';
-                    $("#chatbox").append(serverHtml);
-                    $("#chatbox").animate({ scrollTop: $("#chatbox").prop("scrollHeight") }, 700);
+                    appendMessage("botText", data.msg);
 				});
 				socket.on("self_message", (data)=>{
-                    var serverHtml = '<p class="userText"><span>' + data.msg + '</span></p>';
-                    $("#chatbox").append(serverHtml);
-                    $("#chatbox").animate({ scrollTop: $("#chatbox").prop("scrollHeight") }, 700);
+                    appendMessage("userText", data.msg);
 				});
 				function sendMessage() {
 					var rawText = $("#textInput").val();
 					$("#textInput").val("");
+					if (rawText.trim() === "") return;
 					socket.emit("message", {msg: rawText})
 				}
 				$("#textInput").keypress(function(e) {
